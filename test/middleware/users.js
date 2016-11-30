@@ -4,7 +4,7 @@ const middleware = require('../../src/middleware/users.js');
 const expect = require('chai').expect;
 const sinon = require('sinon');
 
-describe('Users middleware', () => {
+describe('Users middleware', () => {    
     const defaultUserId = 'user-id-1';
     let request, response;
     
@@ -24,19 +24,22 @@ describe('Users middleware', () => {
         expect(request.user).to.exist;
         expect(request.user.id).to.equal(defaultUserId);
     });
-    
-    it('calls the next middleware in the chain', () => {
+	
+	it('calls the next middleware in the chain', () => {
         // Given
-        const next = sinon.spy();
+        let calledNext = false;
+        //const next = () => calledNext = true;
+		const next = sinon.spy();
         
         // When
         middleware(request, response, next);
         
         // Then
-        expect(next.called).to.be.true;
+        //expect(calledNext).to.be.true;
+		expect(next.called).to.be.true;
     });
-    
-    it('if the user is not already signed in, ' +
+	
+	it('if the user is not already signed in, ' +
         'creates a new user id and stores it in a cookie', () => {
         // Given
         request.cookies.userId = undefined;

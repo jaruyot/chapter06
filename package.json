@@ -1,5 +1,5 @@
 {
-  "name": "hangman-app",
+  "name": "chapter02",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -7,20 +7,19 @@
     "test": "set NODE_ENV=test && node node_modules/mocha/bin/mocha test/**/*.js"
   },
   "dependencies": {
-    "body-parser": "~1.13.2",
-    "cookie-parser": "~1.3.5",
+    "body-parser": "~1.15.1",
+    "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
-    "express": "~4.13.1",
+    "express": "~4.13.4",
     "hjs": "~0.0.6",
-    "morgan": "~1.6.1",
+    "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0",
-    "uuid": "^2.0.2"
+    "uuid": "^2.0.3"
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^2.4.5",
-    "phantomjs-prebuilt": "^2.1.7",
-    "sinon": "^1.17.4",
-    "supertest": "^1.2.0"
+    "phantomjs-prebuilt": "^2.1.13",
+    "sinon": "^1.17.6",
+    "supertest": "^2.0.1"
   }
 }

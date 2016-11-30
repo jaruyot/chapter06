@@ -8,12 +8,17 @@
   </head>
   <body>
     <h1>{{ title }}</h1>
+    <p>Welcome to {{ title }} :-)</p>
+	<p>You have visited this site {{visits}} time(s).</p>
+    <p>Your user ID is {{ userId }}.</p>
+	
     <form action="/games" method="POST" id="createGame">
       <input type="text" name="word" id="word"
              placeholder="Enter a word to guess..." />
       <input type="submit" />
     </form>
-    <h2>Games created by you</h2>  
+	
+	<h2>Games created by you</h2>
     <ul id="createdGames">
       {{#createdGames}}
         {{> createdGame}}

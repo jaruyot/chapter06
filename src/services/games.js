@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 
 const games = [];
 let nextId = 1;
@@ -9,8 +9,8 @@ class Game {
         this.setBy = setBy;
         this.word = word.toUpperCase();
     }
-    
-    positionsOf(character) {
+	
+	positionsOf(character) {
         let positions = [];
         for (let i in this.word) {
             if (this.word[i] === character.toUpperCase()) {
@@ -19,7 +19,7 @@ class Game {
         }
         return positions;
     }
-    
+
     remove() {
         games.splice(games.indexOf(this), 1);
     }
@@ -33,7 +33,7 @@ module.exports.create = (userId, word) => {
 
 module.exports.get =
   (id) => games.find(game => game.id === parseInt(id, 10));
-
+  
 module.exports.createdBy =
   (userId) => games.filter(game => game.setBy === userId);
 

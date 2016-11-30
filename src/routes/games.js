@@ -4,16 +4,6 @@ const express = require('express');
 const router = express.Router();
 const service = require('../services/games');
 
-router.post('/', function(req, res, next) {
-    const word = req.body.word;
-    if (word && /^[A-Za-z]{3,}$/.test(word)) {
-        const game = service.create(req.user.id, word); 
-        res.redirect(`/games/${game.id}/created`);
-    } else {
-        res.status(400).send('Word must be at least three characters long and contain only letters');
-    }
-});
-
 const checkGameExists = function(id, res, callback) {
     const game = service.get(id);
     if (game) {
@@ -45,6 +35,23 @@ router.post('/:id/guesses', function(req, res, next) {
     );
 });
 
+router.post('/', function(req, res, next) {
+    const word = req.body.word;
+    if (word && /^[A-Za-z]{3,}$/.test(word)) {
+        const game = service.create(req.user.id, word);
+        res.redirect(`/games/${game.id}/created`);
+    } else {
+        res.status(400).send('Word must be at least three characters long and contain only letters');
+    }
+});
+
+router.get('/:id/created', function(req, res, next) {
+    checkGameExists(
+        req.params.id,
+        res,
+        game => res.render('createdGame', game));
+});
+
 router.delete('/:id', function(req, res, next) {
     checkGameExists(
         req.params.id,
@@ -54,19 +61,10 @@ router.delete('/:id', function(req, res, next) {
                 game.remove();
                 res.send();
             } else {
-                res.status(403).send(
-                    'You do not have permission to delete this game'
-                );
+                res.status(403).send("You don\'t have permission to delete this game");
             }
         }
     );
-});
-
-router.get('/:id/created', function(req, res, next) {
-    checkGameExists(
-        req.params.id,
-        res,
-        game => res.render('createdGame', game));
 });
 
 module.exports = router;
